@@ -1,3 +1,5 @@
+import re
+
 from datetime import date
 
 from django.contrib import messages
@@ -12,7 +14,22 @@ from django.http import JsonResponse
 def pagina_inicial(request):
 
     # Busca o cardápio ativo
-    cardapio = Cardapio.objects.filter(ativo=True).first()
+    hoje = date.today()
+
+    # Define o padrão de matrícula do IFBA
+    padrao_matricula = r"\d{5}[A-Z]+\d{4}"
+
+    while True:
+
+        # Verifica se o cardápio ativo é do dia de hoje
+        cardapio = Cardapio.objects.filter(ativo=True).first()
+
+        if cardapio != None and hoje > cardapio.data:
+            cardapio.ativo = False
+            cardapio.save()
+
+        if cardapio == None or cardapio.ativo:
+            break
 
     # Verifica se o formulário foi enviado
     if request.method == "POST":
@@ -27,6 +44,14 @@ def pagina_inicial(request):
             messages.error(
                 request,
                 "Preencha todos os campos."
+            )
+            return redirect("inicio")
+
+        # Verifica se a matrícula está no padrão do IFBA
+        if not re.match(padrao_matricula, matricula):
+            messages.error(
+                request,
+                "A matrícula está incorreta."
             )
             return redirect("inicio")
 
@@ -93,7 +118,8 @@ def pagina_inicial(request):
         )
 
     contexto = {
-        "cardapio": cardapio
+        "cardapio": cardapio,
+        "padrao_matricula": padrao_matricula
     }
 
     return render(
