@@ -1,0 +1,58 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Quero Merenda</title>
+
+    <link rel="stylesheet" href="{% static 'css/estilo.css' %}">
+
+</head>
+
+<body>
+
+<header>
+
+    <h1>🍽 Quero Merenda</h1>
+
+</header>
+
+<main>
+
+    <!-- Mensagens do sistema -->
+    {% if messages %}
+
+        {% for message in messages %}
+
+            <div class="mensagem {{ message.tags }}">
+
+                {{ message }}
+
+            </div>
+
+        {% endfor %}
+
+    {% endif %}
+
+    <!-- Conteúdo específico de cada página -->
+    {% block conteudo %}
+
+    {% endblock %}
+
+</main>
+
+<footer>
+
+    Instituto Federal da Bahia • Campus Ilhéus
+
+</footer>
+
+</body>
+
+</html>

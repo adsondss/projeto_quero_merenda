@@ -1,0 +1,71 @@
+{% extends 'merenda/base.html' %}
+
+{% block conteudo %}
+
+<div class="card">
+
+    <h2>Merenda do Dia</h2>
+
+    {% if cardapio %}
+
+        <p class="merenda">
+            {{ cardapio.descricao }}
+        </p>
+
+    {% else %}
+
+        <p>
+            Nenhuma merenda cadastrada para hoje.
+        </p>
+
+    {% endif %}
+
+</div>
+
+<div class="card">
+
+    <h2>Entrar na fila</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label for="nome">Nome</label>
+        <input
+            type="text"
+            id="nome"
+            name="nome"
+            maxlength="100"
+            required
+            autocomplete="name"
+        >
+
+        <label for="turma">Turma</label>
+        <input
+            type="text"
+            id="turma"
+            name="turma"
+            maxlength="30"
+            required
+        >
+
+        <label for="matricula">Matrícula</label>
+        <input
+            type="text"
+            id="matricula"
+            name="matricula"
+            maxlength="20"
+            pattern="[0-9]+"
+            title="Digite apenas números."
+            required
+        >
+
+        <button type="submit">
+            Entrar na fila
+        </button>
+
+    </form>
+
+</div>
+
+{% endblock %}

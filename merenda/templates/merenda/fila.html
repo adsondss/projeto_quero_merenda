@@ -1,0 +1,158 @@
+{% extends 'merenda/base.html' %}
+
+{% block conteudo %}
+
+<div class="card">
+
+```
+<h2>Fila da Merenda</h2>
+
+{% if alunos_fila %}
+
+<table>
+
+    <thead>
+
+        <tr>
+            <th>Posição</th>
+            <th>Aluno</th>
+            <th>Turma</th>
+            <th>Horário</th>
+            <th>Status</th>
+            <th>Ação</th>
+        </tr>
+
+    </thead>
+
+    <tbody id="corpo-fila">
+
+    {% for fila in alunos_fila %}
+
+        <tr>
+
+            <td>{{ forloop.counter }}</td>
+
+            <td>{{ fila.aluno.nome }}</td>
+
+            <td>{{ fila.aluno.turma }}</td>
+
+            <td>{{ fila.horario_entrada|date:"H:i" }}</td>
+
+            <td>{{ fila.status }}</td>
+      
+            <td>
+
+                <form
+                    method="POST"
+                    action="{% url 'atender' fila.id %}"
+                >
+
+                    {% csrf_token %}
+
+                    <button
+                        type="submit"
+                        class="botao-atender"
+                    >
+                        Atender
+                    </button>
+
+                </form>
+
+            </td>
+
+
+
+        </tr>
+
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% else %}
+
+    <p>Não há alunos aguardando atendimento.</p>
+
+{% endif %}
+
+
+</div>
+
+<script>
+
+function atualizarFila() {
+
+    fetch("/fila/json/")
+
+    .then(response => response.json())
+
+    .then(dados => {
+
+        let tabela = document.getElementById("corpo-fila");
+
+        tabela.innerHTML = "";
+
+        dados.forEach(aluno => {
+
+            tabela.innerHTML += `
+                <tr>
+
+                    <td>${aluno.posicao}</td>
+
+                    <td>${aluno.nome}</td>
+
+                    <td>${aluno.turma}</td>
+
+                    <td>${aluno.hora}</td>
+
+                    <td>AGUARDANDO</td>
+
+                    <td>
+
+                        <form
+                            method="POST"
+                            action="/atender/${aluno.id}/"
+                        >
+
+                            <input
+                                type="hidden"
+                                name="csrfmiddlewaretoken"
+                                value="{{ csrf_token }}"
+                            >
+
+                            <button
+                                type="submit"
+                                class="botao-atender"
+                            >
+                                Atender
+                            </button>
+
+                        </form>
+
+                    </td>
+
+
+
+                </tr>
+            `;
+
+        });
+
+    })
+
+    .catch(error => {
+        console.error("Erro ao atualizar a fila:", error);
+    });
+
+}
+
+// Atualiza imediatamente
+atualizarFila();
+
+// Atualiza a cada 3 segundos
+setInterval(atualizarFila, 3000);
+
+</script>
+
+{% endblock %}

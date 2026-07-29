@@ -1,0 +1,100 @@
+{% extends 'merenda/base.html' %}
+
+{% block conteudo %}
+
+<div class="card">
+
+    <h2>✅ Entrada na fila confirmada!</h2>
+
+    <p>
+        Sua solicitação foi registrada com sucesso.
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h3>Dados do aluno</h3>
+
+    <p>
+        <strong>Nome:</strong>
+        {{ fila.aluno.nome }}
+    </p>
+
+    <p>
+        <strong>Matrícula:</strong>
+        {{ fila.aluno.matricula }}
+    </p>
+
+    <p>
+        <strong>Turma:</strong>
+        {{ fila.aluno.turma }}
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h3>Merenda do dia</h3>
+
+    <p>
+
+        {{ fila.cardapio.descricao }}
+
+    </p>
+
+</div>
+
+<div class="card">
+
+    <h3>Informações da fila</h3>
+
+    <p>
+
+        <strong>Horário de entrada:</strong>
+
+        {{ fila.horario_entrada|date:"H:i:s" }}
+
+    </p>
+
+    <p>
+
+        <strong>Sua posição:</strong>
+
+        {{ posicao }}
+
+    </p>
+
+    <p>
+
+        <strong>Pessoas à sua frente:</strong>
+
+        {{ pessoas_na_frente }}
+
+    </p>
+
+    <p>
+
+        <strong>Status:</strong>
+
+        {{ fila.status }}
+
+    </p>
+
+</div>
+
+<div class="card">
+
+    <a href="{% url 'inicio' %}">
+
+        <button>
+
+            Voltar para a página inicial
+
+        </button>
+
+    </a>
+
+</div>
+
+{% endblock %}
