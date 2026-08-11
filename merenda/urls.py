@@ -28,11 +28,27 @@ urlpatterns = [
         name="atender"
     ),
 
-
     path(
         "fila/json/",
         views.fila_json,
         name="fila_json"
     ),
 
+    path(
+        "cardapio/",
+        views.cardapio,
+        name="cardapio"
+    ),
+
+    path(
+        "painel/",
+        views.painel,
+        name="painel"
+    ),
+
+    path(
+        "administracao/",
+        views.administracao,
+        name="administracao"
+    ),
 ]

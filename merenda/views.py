@@ -1,6 +1,6 @@
 import re
 
-from datetime import date
+from datetime import date, timedelta, datetime
 
 from django.contrib import messages
 from django.shortcuts import render, redirect
@@ -10,6 +10,10 @@ from .models import Aluno, Cardapio, Fila
 from django.contrib.auth.decorators import login_required
 
 from django.http import JsonResponse
+
+from datetime import timedelta
+
+from django.http import HttpResponse
 
 def pagina_inicial(request):
 
@@ -202,3 +206,183 @@ def fila_json(request):
         })
 
     return JsonResponse(dados, safe=False)
+
+@login_required
+def cardapio(request):
+
+    hoje = date.today()
+
+    if request.method == "POST":
+
+        cardapio_id = request.POST.get("cardapio_id")
+        
+        data = request.POST.get("data")
+        descricao = request.POST.get("descricao")
+        observacao = request.POST.get("observacao")
+
+        ativo = request.POST.get("ativo") == "on"
+
+        if not data or not descricao:
+
+            messages.error(
+                request,
+                "Preencha a data e a descrição."
+            )
+
+            return redirect("cardapio")
+
+# ===================================
+# EDITAR CARDÁPIO
+# ===================================
+
+        if cardapio_id:
+
+            cardapio = Cardapio.objects.get(id=cardapio_id)
+
+            cardapio.data = data
+            cardapio.descricao = descricao
+            cardapio.observacao = observacao
+            cardapio.ativo = ativo
+
+            cardapio.save()
+
+            messages.success(
+            request,
+            "Cardápio atualizado com sucesso!"
+            )
+
+# ===================================
+# NOVO CARDÁPIO
+# ===================================
+
+        else:
+
+            cardapio, criado = Cardapio.objects.update_or_create(
+
+                data=data,
+
+                defaults={
+                    "descricao": descricao,
+                    "observacao": observacao,
+                    "ativo": ativo,
+                }
+
+            )
+
+            if criado:
+
+                messages.success(
+                    request,
+                    "Cardápio cadastrado com sucesso!"
+                )
+
+            else:
+
+                messages.success(
+                    request,
+                    "Cardápio atualizado com sucesso!"
+                )
+
+        return redirect("cardapio")
+
+    ultimos_cardapios = Cardapio.objects.filter(
+        data__gte=hoje - timedelta(days=6)
+    ).order_by("-data")
+
+    contexto = {
+
+        "hoje": hoje,
+        "ultimos_cardapios": ultimos_cardapios
+
+    }
+
+    return render(
+        request,
+        "merenda/cardapio.html",
+        contexto
+    )
+
+@login_required
+def painel(request):
+
+    fila = Fila.objects.filter(
+
+        status="AGUARDANDO"
+
+    ).order_by(
+
+        "horario_entrada"
+
+    ).first()
+
+    if fila is None:
+
+        return render(
+
+            request,
+
+            "merenda/painel.html",
+
+            {
+
+                "fila": None,
+
+                "cardapio": None,
+
+                "posicao": 0,
+
+                "total_aguardando": 0,
+
+                "hora_atual": datetime.now()
+
+            }
+
+        )
+
+    cardapio = fila.cardapio
+
+    pessoas_na_frente = Fila.objects.filter(
+
+        data=fila.data,
+
+        status="AGUARDANDO",
+
+        horario_entrada__lt=fila.horario_entrada
+
+    ).count()
+
+    total_aguardando = Fila.objects.filter(
+
+        status="AGUARDANDO"
+
+    ).count()
+
+    return render(
+
+        request,
+
+        "merenda/painel.html",
+
+        {
+
+            "fila": fila,
+
+            "cardapio": cardapio,
+
+            "posicao": pessoas_na_frente + 1,
+
+            "total_aguardando": total_aguardando,
+
+            "hora_atual": datetime.now()
+
+        }
+
+    )
+
+@login_required
+def administracao(request):
+
+    return render(
+        request,
+        "merenda/administracao.html"
+    )

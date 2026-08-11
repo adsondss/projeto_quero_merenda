@@ -2,9 +2,15 @@
 
 {% block conteudo %}
 
+<a
+    href="{% url 'administracao' %}"
+    class="botao-voltar"
+>
+    ← Voltar para Administração
+</a>
+
 <div class="card">
 
-```
 <h2>Fila da Merenda</h2>
 
 {% if alunos_fila %}

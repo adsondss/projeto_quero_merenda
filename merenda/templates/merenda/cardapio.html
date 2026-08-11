@@ -1,0 +1,301 @@
+{% extends "merenda/base.html" %}
+
+{% block conteudo %}
+
+<a
+    href="{% url 'administracao' %}"
+    class="botao-voltar"
+>
+    ← Voltar para Administração
+</a>
+
+<div class="card">
+
+    <h2>Cadastro de Cardápio</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <input
+            type="hidden"
+            id="cardapio_id"
+            name="cardapio_id"
+        >
+
+        <div>
+
+            <label>Data</label>
+
+            <input
+                type="date"
+                id="data"
+                name="data"
+                value="{{ hoje|date:'Y-m-d' }}"
+            >
+
+            <button
+                type="button"
+                id="btn-hoje"
+            >
+                Hoje
+            </button>
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label>Descrição</label>
+
+            <input
+                type="text"
+                id="descricao"
+                name="descricao"
+                style="width:100%;"
+                required
+            >
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label>Observação</label>
+
+            <textarea
+                id="observacao"
+                name="observacao"
+                rows="4"
+                style="width:100%;"
+            ></textarea>
+
+        </div>
+
+        <br>
+
+        <div>
+
+            <label>
+
+                <input
+                    type="checkbox"
+                    id="ativo"
+                    name="ativo"
+                    checked
+                >
+
+                Cardápio ativo
+
+            </label>
+
+        </div>
+
+        <br>
+
+        <button type="submit">
+
+            Salvar
+
+        </button>
+
+    </form>
+
+</div>
+
+<br>
+
+<div class="card">
+
+    <h2>Últimos 7 dias</h2>
+
+    <table>
+
+        <thead>
+
+            <tr>
+
+                <th>Data</th>
+                <th>Descrição</th>
+                <th>Observação</th>
+                <th>Ativo</th>
+                <th>Usar</th>
+                <th>Editar</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+        {% for cardapio in ultimos_cardapios %}
+
+            <tr>
+
+                <td>{{ cardapio.data|date:"d/m/Y" }}</td>
+
+                <td>{{ cardapio.descricao }}</td>
+
+                <td>{{ cardapio.observacao }}</td>
+
+                <td>
+
+                    {% if cardapio.ativo %}
+                        Sim
+                    {% else %}
+                        Não
+                    {% endif %}
+
+                </td>
+
+                <td>
+
+                    <button
+                        type="button"
+                        class="btn-usar"
+
+                        data-descricao="{{ cardapio.descricao }}"
+
+                        data-observacao="{{ cardapio.observacao }}"
+
+                        data-ativo="{{ cardapio.ativo|yesno:'true,false' }}"
+                    >
+
+                        Usar
+
+                    </button>
+
+                </td>
+
+                <td>
+                    
+                    <button
+                        type="button"
+                        class="btn-editar"
+
+                        data-id="{{ cardapio.id }}"
+
+                        data-data="{{ cardapio.data|date:'Y-m-d' }}"
+
+                        data-descricao="{{ cardapio.descricao }}"
+
+                        data-observacao="{{ cardapio.observacao }}"
+
+                        data-ativo="{{ cardapio.ativo|yesno:'true,false' }}"
+
+                    >
+
+                        Editar
+
+                    </button>
+
+                </td>
+
+            </tr>
+
+        {% empty %}
+
+            <tr>
+
+                <td colspan="6">
+
+                    Nenhum cardápio cadastrado.
+
+                </td>
+
+            </tr>
+
+        {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+<script>
+
+// ======================================================
+// BOTÃO "HOJE"
+// ======================================================
+
+document.getElementById("btn-hoje").addEventListener("click", function () {
+
+    let hoje = new Date();
+
+    let ano = hoje.getFullYear();
+
+    let mes = String(hoje.getMonth() + 1).padStart(2, "0");
+
+    let dia = String(hoje.getDate()).padStart(2, "0");
+
+    document.getElementById("data").value =
+        ano + "-" + mes + "-" + dia;
+
+});
+
+
+// ======================================================
+// BOTÃO "USAR"
+// ======================================================
+
+const botoesUsar = document.querySelectorAll(".btn-usar");
+
+botoesUsar.forEach(function(botao){
+
+    botao.addEventListener("click", function(){
+
+        // Limpa o ID para indicar que será criado
+        // um novo cardápio
+        document.getElementById("cardapio_id").value = "";
+
+        // Mantém a data atual do formulário
+
+        document.getElementById("descricao").value =
+            this.dataset.descricao;
+
+        document.getElementById("observacao").value =
+            this.dataset.observacao;
+
+        document.getElementById("ativo").checked =
+            this.dataset.ativo === "true";
+
+    });
+
+});
+
+
+// ======================================================
+// BOTÃO "EDITAR"
+// ======================================================
+
+const botoesEditar = document.querySelectorAll(".btn-editar");
+
+botoesEditar.forEach(function(botao){
+
+    botao.addEventListener("click", function(){
+
+        document.getElementById("cardapio_id").value =
+            this.dataset.id;
+
+        document.getElementById("data").value =
+            this.dataset.data;
+
+        document.getElementById("descricao").value =
+            this.dataset.descricao;
+
+        document.getElementById("observacao").value =
+            this.dataset.observacao;
+
+        document.getElementById("ativo").checked =
+            this.dataset.ativo === "true";
+
+    });
+
+});
+
+</script>
+
+{% endblock %}

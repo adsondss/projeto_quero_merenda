@@ -181,3 +181,621 @@ tr:hover{
 .botao-atender:hover{
     background:#2E7D32;
 }
+
+.painel{
+
+    max-width:800px;
+
+    margin:30px auto;
+
+    text-align:center;
+
+}
+
+.painel h1{
+
+    color:#0B7A3D;
+
+    font-size:38px;
+
+}
+
+.hora{
+
+    font-size:16px;
+
+    color:#666;
+
+}
+
+.secao-merenda{
+
+    margin:30px 0;
+
+}
+
+.secao-merenda h2{
+
+    font-size:24px;
+
+}
+
+.cardapio{
+
+    font-size:32px;
+
+    font-weight:bold;
+
+    color:#0B7A3D;
+
+    margin:15px 0;
+
+}
+
+.observacao{
+
+    font-size:20px;
+
+    color:#666;
+
+    margin-top:10px;
+
+}
+
+.proximo-aluno{
+
+    margin:30px 0;
+
+}
+
+.proximo-aluno h2{
+
+    font-size:24px;
+
+    color:#333;
+
+}
+
+.proximo-aluno h3{
+
+    font-size:46px;
+
+    color:#0B7A3D;
+
+    margin:15px 0;
+
+}
+
+.proximo-aluno p{
+
+    font-size:22px;
+
+}
+
+.aguardando{
+
+    margin-top:30px;
+
+    font-size:22px;
+
+    color:#444;
+
+}
+
+.sem-fila{
+
+    margin-top:100px;
+
+    text-align:center;
+
+}
+
+.sem-fila h1{
+
+    color:#198754;
+
+    font-size:48px;
+
+}
+
+.sem-fila p{
+
+    font-size:22px;
+
+    color:#555;
+
+}
+
+/* ========================================
+   PÁGINA DE ADMINISTRAÇÃO
+======================================== */
+
+.administracao{
+
+    max-width:1000px;
+
+    margin:40px auto;
+
+    padding:20px;
+
+    text-align:center;
+
+}
+
+.administracao h1{
+
+    color:#0B7A3D;
+
+    font-size:40px;
+
+    margin-bottom:10px;
+
+}
+
+.subtitulo-administracao{
+
+    font-size:20px;
+
+    color:#666;
+
+    margin-bottom:40px;
+
+}
+
+
+/* MENU */
+
+.menu-administracao{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap:25px;
+
+}
+
+
+/* CARTÕES */
+
+.opcao-administracao{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:30px 20px;
+
+    box-shadow:
+        0 3px 10px
+        rgba(0,0,0,0.12);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+
+}
+
+.opcao-administracao:hover{
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 6px 18px
+        rgba(0,0,0,0.18);
+
+}
+
+
+/* ÍCONE */
+
+.icone-administracao{
+
+    font-size:55px;
+
+    margin-bottom:15px;
+
+}
+
+
+/* TÍTULO */
+
+.opcao-administracao h2{
+
+    color:#333;
+
+    font-size:26px;
+
+    margin-bottom:15px;
+
+}
+
+
+/* DESCRIÇÃO */
+
+.opcao-administracao p{
+
+    color:#666;
+
+    font-size:17px;
+
+    line-height:1.5;
+
+    min-height:75px;
+
+}
+
+
+/* BOTÃO */
+
+.botao-administracao{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    padding:12px 22px;
+
+    background:#198754;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:6px;
+
+    font-weight:bold;
+
+    transition:
+        background 0.2s;
+
+}
+
+.botao-administracao:hover{
+
+    background:#146c43;
+
+}
+
+/* ========================================
+   PÁGINA DE ADMINISTRAÇÃO
+======================================== */
+
+.administracao {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.administracao h1 {
+    color: #198754;
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.subtitulo-administracao {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 40px;
+}
+
+
+/* MENU DE OPÇÕES */
+
+.menu-administracao {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+
+/* CARTÕES */
+
+.opcao-administracao {
+    background-color: white;
+    border-radius: 12px;
+    padding: 30px 20px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+
+/* EFEITO AO PASSAR O MOUSE */
+
+.opcao-administracao:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+
+/* ÍCONES */
+
+.icone-administracao {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+
+/* TÍTULOS */
+
+.opcao-administracao h2 {
+    color: #333;
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+
+/* DESCRIÇÃO */
+
+.opcao-administracao p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.5;
+    min-height: 75px;
+}
+
+
+/* BOTÕES */
+
+.botao-administracao {
+    display: inline-block;
+
+    margin-top: 20px;
+
+    padding: 12px 22px;
+
+    background-color: #198754;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+
+/* EFEITO DO BOTÃO */
+
+.botao-administracao:hover {
+    background-color: #146c43;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .menu-administracao {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+/* ========================================
+   BOTÃO VOLTAR
+======================================== */
+
+.botao-voltar {
+
+    display: inline-block;
+
+    margin: 20px;
+
+    padding: 10px 18px;
+
+    background-color: #6c757d;
+
+    color: white;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s ease;
+
+}
+
+
+.botao-voltar:hover {
+
+    background-color: #495057;
+
+}
+
+/* ========================================
+   CABEÇALHO DA ADMINISTRAÇÃO
+======================================== */
+
+.administracao {
+    max-width: 1100px;
+    margin: 30px auto 50px;
+    padding: 20px;
+    text-align: center;
+}
+
+.administracao h1 {
+    color: #198754;
+    font-size: 38px;
+    margin-bottom: 8px;
+}
+
+.subtitulo-administracao {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 35px;
+}
+
+
+/* ========================================
+   MENU DA ADMINISTRAÇÃO
+======================================== */
+
+.menu-administracao {
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 25px;
+}
+
+
+/* ========================================
+   CARTÕES
+======================================== */
+
+.opcao-administracao {
+    background-color: #ffffff;
+
+    border-radius: 12px;
+
+    padding: 30px 22px;
+
+    box-shadow:
+        0 3px 10px rgba(0, 0, 0, 0.12);
+
+    border: 1px solid #eeeeee;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.opcao-administracao:hover {
+    transform: translateY(-5px);
+
+    box-shadow:
+        0 7px 18px rgba(0, 0, 0, 0.16);
+}
+
+
+/* ========================================
+   ÍCONES
+======================================== */
+
+.icone-administracao {
+    font-size: 52px;
+
+    margin-bottom: 15px;
+}
+
+
+/* ========================================
+   TÍTULOS
+======================================== */
+
+.opcao-administracao h2 {
+    color: #333333;
+
+    font-size: 25px;
+
+    margin-bottom: 12px;
+}
+
+
+/* ========================================
+   TEXTOS
+======================================== */
+
+.opcao-administracao p {
+    color: #666666;
+
+    font-size: 16px;
+
+    line-height: 1.5;
+
+    min-height: 72px;
+}
+
+
+/* ========================================
+   BOTÕES DA ADMINISTRAÇÃO
+======================================== */
+
+.botao-administracao {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    padding: 12px 22px;
+
+    background-color: #198754;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+.botao-administracao:hover {
+    background-color: #146c43;
+}
+
+
+/* ========================================
+   BOTÃO VOLTAR
+======================================== */
+
+.botao-voltar {
+    display: inline-block;
+
+    margin: 20px;
+
+    padding: 10px 18px;
+
+    background-color: #6c757d;
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    border-radius: 6px;
+
+    font-weight: bold;
+
+    transition:
+        background-color 0.2s ease;
+}
+
+.botao-voltar:hover {
+    background-color: #495057;
+}
+
+
+/* ========================================
+   RESPONSIVIDADE
+======================================== */
+
+@media (max-width: 800px) {
+
+    .menu-administracao {
+        grid-template-columns: 1fr;
+    }
+
+}
