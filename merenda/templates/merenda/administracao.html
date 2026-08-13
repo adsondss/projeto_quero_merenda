@@ -1,0 +1,103 @@
+{% extends "merenda/base.html" %}
+
+{% block conteudo %}
+
+<a
+    href="{% url 'inicio' %}"
+    class="botao-voltar"
+>
+    ← Página Inicial
+</a>
+
+<div class="administracao">
+
+    <h1>⚙️ Administração</h1>
+
+    <p class="subtitulo-administracao">
+        Gerenciamento do sistema Quero Merenda
+    </p>
+
+
+    <div class="menu-administracao">
+
+
+        <!-- CARDÁPIO -->
+
+        <div class="opcao-administracao">
+
+            <div class="icone-administracao">
+                🍽
+            </div>
+
+            <h2>Cardápio</h2>
+
+            <p>
+                Cadastrar, editar e consultar
+                os cardápios da merenda escolar.
+            </p>
+
+            <a
+                href="{% url 'cardapio' %}"
+                class="botao-administracao"
+            >
+                Acessar Cardápio
+            </a>
+
+        </div>
+
+
+        <!-- FILA -->
+
+        <div class="opcao-administracao">
+
+            <div class="icone-administracao">
+                👥
+            </div>
+
+            <h2>Fila</h2>
+
+            <p>
+                Visualizar e gerenciar os alunos
+                que estão aguardando atendimento.
+            </p>
+
+            <a
+                href="{% url 'fila' %}"
+                class="botao-administracao"
+            >
+                Acessar Fila
+            </a>
+
+        </div>
+
+
+        <!-- PAINEL -->
+
+        <div class="opcao-administracao">
+
+            <div class="icone-administracao">
+                📺
+            </div>
+
+            <h2>Painel de Chamada</h2>
+
+            <p>
+                Exibir a chamada dos alunos
+                e acompanhar o atendimento.
+            </p>
+
+            <a
+                href="{% url 'painel' %}"
+                class="botao-administracao"
+            >
+                Acessar Painel
+            </a>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock %}

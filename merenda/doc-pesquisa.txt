@@ -1,0 +1,61 @@
+Chat das funcionalidades faltantes: https://chatgpt.com/share/6a6a50e7-fae8-83e9-a547-0b2f4f8874b1
+
+Diagrama ER: https://mermaid.live/edit#pako:eNqtU9tq20AQ_ZVlnhpwjOzYkao3ESdgkrqhpC_FYMbasbwg7Yi9hLSKP6jf0R_Lyq6DrZA2gbxoNWfnnDk7O9tAzpIgBTIThYXBam7mWojs5vvsq2h2gRBLVSjthJLi9nqPWWeULoTmijpQhWHNfYkd3HlTPWNL5pJQC3Tqnnfgpl12vxfZt0l2O_2PBYmO2k-3kCSbBwfIe9zRgxO8tGTu8QD-t4er6U32zvot4FRFYs0GjeIFaWdQdv1Zh87bjjKWXvMi6F9dd3ZyNBJrdbR54DO7u5xNpl8uZ3dvaNeRuxBrGQDt-MPMbAfn8fH0lJtdB1Mxh5qt9WoOnct9mSZpgdZyrtCIT1znijWWJ3vikfjhsVuyo-q1At3UP78XvCJDuZLhigINelAYJSF1xlMPKgqD2obQtHJBe01hyqHlSlqhL10opTeBVqP-wVztmYZ9sYZ0haUNka_blv99WM-oCU0nc8FeO0gHo2grAmkDD5COhsP--WAcR3E0HJ_FSTzuwU9Ix1H_PIlH8VmSJINBNPq86cGvbdmoH3I2T_oAO4Q
+
+Diagrama de classes: https://www.plantuml.com/plantuml/uml/dLBHRjGm47ptLwpkYO9IfV1s0gdkvGgHK4-GvBdQ9ajZ4Tk7lQw0gX_3j_1ZkCw5oo5LXvgNP7ScCvE9ppsZuw07uRygiqM76je1lPVCJjq4fhArfb8_2N8XUjKHaDxo3z34lUsy48aDSWZ6mhs0UBrItH8krAqCR2yL3TsuDLRJ4bOzkhHySPRd9oEYCNgrOS0v_3e_WVjWrBT03oEDWzC7b3UJ0BAwiz7Jse7G913UGUq2YOSfuGfTXrjr96I772qAP9eloRSn8Dh3V9ExlV7axZ3XDNtdXFz_i4iru3D2zTQXK_QQ33liTdYjz9pZ6JduMMgHzbcMRbKjwwQwNdtObAjrbLRoVIC_5_Ags8nZlRugojrGhAkogiic3HSVDv-QjOpGt--GJAQB_eQFT3mbn_qB_wQFekE9Mfmju6sMmI8_FNsv6BjQ0ZvYOlgZJv3Q2F_-5V4dj6PvZqdEkOVAnZA1KxSzW_sIdCMkT97DsypsNMRx9hDPZz407jM4E8-FGGz_0000
+
+@startuml
+skinparam classAttributeIconSize 0
+
+hide empty methods
+
+class Aluno {
+    +id: BigAutoField
+    +nome: CharField(100)
+    +matricula: CharField(20) {unique}
+    +turma: CharField(30)
+    +ativo: BooleanField = True
+}
+
+class Cardapio {
+    +id: BigAutoField
+    +data: DateField
+    +descricao: CharField(200)
+    +observacao: TextField
+    +ativo: BooleanField = True
+}
+
+class Fila {
+    +id: BigAutoField
+    +data: DateField
+    +horario_entrada: DateTimeField
+    +status: CharField
+
+    --
+    STATUS_CHOICES
+    AGUARDANDO
+    ATENDIDO
+    DESISTIU
+    BLOQUEADO
+}
+
+class Atendimento {
+    +id: BigAutoField
+    +horario_atendimento: DateTimeField
+}
+
+Aluno "1" <-- "0..*" Fila : aluno
+Cardapio "1" <-- "0..*" Fila : cardápio
+
+Aluno "1" <-- "0..*" Atendimento : aluno
+Cardapio "1" <-- "0..*" Atendimento : cardápio
+
+note right of Fila
+status:
+- AGUARDANDO
+- ATENDIDO
+- DESISTIU
+- BLOQUEADO
+end note
+
+@enduml

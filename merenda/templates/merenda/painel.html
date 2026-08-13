@@ -1,0 +1,129 @@
+{% extends "merenda/base.html" %}
+
+{% block conteudo %}
+
+<a
+    href="{% url 'administracao' %}"
+    class="botao-voltar"
+>
+    ← Voltar para Administração
+</a>
+
+<div class="painel">
+
+    <h1>🍽 Painel de Chamada</h1>
+
+    <p class="hora">
+        Horário: {{ hora_atual|date:"H:i:s" }}
+    </p>
+
+    <hr>
+
+    <!-- MERENDA DO DIA -->
+
+    <section class="secao-merenda">
+
+        <h2>🍽 Merenda de Hoje</h2>
+
+        {% if cardapio %}
+
+            <div class="cardapio">
+
+                <strong>
+                    {{ cardapio.descricao }}
+                </strong>
+
+            </div>
+
+            {% if cardapio.observacao %}
+
+                <p class="observacao">
+                    {{ cardapio.observacao }}
+                </p>
+
+            {% endif %}
+
+        {% else %}
+
+            <p>
+                Nenhum cardápio cadastrado para hoje.
+            </p>
+
+        {% endif %}
+
+    </section>
+
+    <hr>
+
+    <!-- PRÓXIMO ALUNO -->
+
+    {% if fila %}
+
+        <section class="proximo-aluno">
+
+            <h2>Próximo Aluno</h2>
+
+            <h3>
+                {{ fila.aluno.nome }}
+            </h3>
+
+            <p>
+                Turma:
+                <strong>
+                    {{ fila.aluno.turma }}
+                </strong>
+            </p>
+
+        </section>
+
+        <hr>
+
+        <!-- TOTAL DE ALUNOS -->
+
+        <div class="aguardando">
+
+            👥
+
+            Existem
+
+            <strong>
+                {{ total_aguardando }}
+            </strong>
+
+            alunos aguardando atendimento.
+
+        </div>
+
+    {% else %}
+
+        <div class="sem-fila">
+
+            <h1>
+                ✅ Fila Encerrada
+            </h1>
+
+            <p>
+                No momento não existem estudantes aguardando atendimento.
+            </p>
+
+            <p>
+                Aguarde novos alunos entrarem na fila.
+            </p>
+
+        </div>
+
+    {% endif %}
+
+</div>
+
+<script>
+
+setTimeout(function(){
+
+    location.reload();
+
+}, 5000);
+
+</script>
+
+{% endblock %}
